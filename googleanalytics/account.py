@@ -1,4 +1,3 @@
-%%writefile /content/google-analytics/googleanalytics/account.py
 # encoding: utf-8
 
 """
