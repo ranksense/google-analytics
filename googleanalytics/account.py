@@ -60,7 +60,7 @@ class Account(object):
         self.permissions = raw['permissions'] #raw['permissions']['effective']
 
     @property
-    @utils.memoize
+    #@utils.memoize
     def webproperties(self):
         """
         A list of all web properties on this account. You may
@@ -254,7 +254,7 @@ class WebProperty(object):
         return self.profiles[default]
 
     @property
-    @utils.memoize
+    #@utils.memoize
     def profiles(self):
         """
         A list of all profiles on this web property. You may
