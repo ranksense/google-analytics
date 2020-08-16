@@ -57,6 +57,14 @@ def authenticate(
     to authorize this Python module to access Google Analytics data on their behalf,
     using an OAuth2 token.
     """
+    
+    
+    accounts = oauth.authenticate(None)
+    
+    scope = navigate(accounts, account=account, webproperty=webproperty, profile=profile)
+    return scope
+
+    #Skip
 
     credentials = oauth.Credentials.find(
         valid=True,
