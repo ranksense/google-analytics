@@ -150,7 +150,7 @@ def authenticate(
 
     from googleanalytics import account
     
-    accounts = [account.Account(raw, service, credentials) for raw in raw_accounts]
+    accounts = [account.Account(raw, None, credentials) for raw in raw_accounts]
     
     #return addressable.List(accounts, indices=['id', 'name'], insensitive=True)
 
