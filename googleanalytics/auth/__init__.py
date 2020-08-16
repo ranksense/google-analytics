@@ -103,9 +103,59 @@ def authenticate(
     credentials["private_key"] = None
     credentials["refresh_token"] = None
 
-    accounts = oauth.authenticate(credentials)
-    scope = navigate(accounts, account=account, webproperty=webproperty, profile=profile)
-    return scope
+    #accounts = oauth.authenticate(credentials)
+    
+    raw_accounts = [{'childLink': {'href': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXX/webproperties',
+       'type': 'analytics#webproperties'},
+      'created': '2006-06-07T20:01:28.000Z',
+      'id': 'XXXXXX',
+      'kind': 'analytics#account',
+      'name': 'sitename_11',
+      'permissions': {'effective': ['COLLABORATE', 'READ_AND_ANALYZE']},
+      'selfLink': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXX',
+      'updated': '2019-07-02T18:00:31.573Z'},
+     {'childLink': {'href': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXXXX/webproperties',
+       'type': 'analytics#webproperties'},
+      'created': '2014-02-13T03:15:18.155Z',
+      'id': 'XXXXXXXX',
+      'kind': 'analytics#account',
+      'name': 'sitename_10',
+      'permissions': {'effective': []},
+      'selfLink': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXXXX',
+      'updated': '2016-07-14T19:41:40.634Z'},
+     {'childLink': {'href': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXXXX/webproperties',
+       'type': 'analytics#webproperties'},
+      'created': '2014-05-05T18:50:09.025Z',
+      'id': 'XXXXXXXX',
+      'kind': 'analytics#account',
+      'name': 'RankSense',
+      'permissions': {'effective': ['COLLABORATE',
+        'EDIT',
+        'MANAGE_USERS',
+        'READ_AND_ANALYZE']},
+      'selfLink': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXXX',
+      'updated': '2017-02-25T17:20:39.203Z'},
+     {'childLink': {'href': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXXX/webproperties',
+       'type': 'analytics#webproperties'},
+      'created': '2017-05-05T15:40:21.336Z',
+      'id': 'XXXXXXXX',
+      'kind': 'analytics#account',
+      'name': 'http://sitename_09/',
+      'permissions': {'effective': ['COLLABORATE',
+        'EDIT',
+        'MANAGE_USERS',
+        'READ_AND_ANALYZE']},
+      'selfLink': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXXXX',
+      'updated': '2017-05-05T15:40:21.336Z'}]
+
+        
+    accounts = [account.Account(raw, service, credentials) for raw in raw_accounts]
+    
+    #return addressable.List(accounts, indices=['id', 'name'], insensitive=True)
+
+    #scope = navigate(accounts, account=account, webproperty=webproperty, profile=profile)
+    
+    return accounts #scope
 
 def authorize(client_id=None, client_secret=None, client_email=None, private_key=None, save=False, identity=None, prefix=None, suffix=None):
     base_credentials = oauth.Credentials.find(
