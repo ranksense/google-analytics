@@ -148,7 +148,8 @@ def authenticate(
       'selfLink': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXXXX',
       'updated': '2017-05-05T15:40:21.336Z'}]
 
-        
+    from googleanalytics import account
+    
     accounts = [account.Account(raw, service, credentials) for raw in raw_accounts]
     
     #return addressable.List(accounts, indices=['id', 'name'], insensitive=True)
