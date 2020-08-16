@@ -658,12 +658,18 @@ class ReportingAPI(object):
         self.cache = None
 
     @property
-    @utils.memoize
+    #@utils.memoize
     def all_columns(self):
-        query = self.service.metadata().columns().list(
-            reportType=self.report_type
-            )
-        raw_columns = query.execute()['items']
+        #query = self.service.metadata().columns().list(
+        #    reportType=self.report_type
+        #    )
+        #raw_columns = query.execute()['items']
+        
+        import pickle
+
+        with open("raw_columans.pkl", "rb") as f:
+          raw_columns = pickle.load(f)
+        
         hydrated_columns = utils.flatten(map(Column.from_metadata, raw_columns))
         return ColumnList(hydrated_columns, unique=False)
 
