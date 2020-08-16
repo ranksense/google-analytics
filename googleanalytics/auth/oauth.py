@@ -42,5 +42,11 @@ def authenticate(credentials):
     client = credentials.authorize()
     service = discovery.build('analytics', 'v3', http=client)
     raw_accounts = service.management().accounts().list().execute()['items']
+    import pickle
+    
+    #save accounts
+    with open("raw_accounts.pkl", "wb") as f:
+        f.write(raw_accounts)
+        
     accounts = [account.Account(raw, service, credentials) for raw in raw_accounts]
     return addressable.List(accounts, indices=['id', 'name'], insensitive=True)
