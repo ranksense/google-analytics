@@ -1,5 +1,7 @@
 # Google Analytics for Python and the command-line
 
+Forked to return mock data in my LiveProject turorials. See https://liveproject.manning.com/
+
 [![Build Status](https://travis-ci.org/debrouwere/google-analytics.svg)](https://travis-ci.org/debrouwere/google-analytics)
 
 `google-analytics` takes the pain out of working with the Google Analytics reporting APIs. It supports both the Core and the Real Time API. It is written in Python but there's also a full-featured command-line interface.
