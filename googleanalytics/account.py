@@ -643,9 +643,11 @@ class ReportingAPI(object):
         self.profile = profile
         self.account = account = profile.account
         self.service = service = profile.account.service
-        root = service.data()
+        #root = service.data()
+        root = None
         self.endpoint_type = endpoint
-        self.endpoint = getattr(root, endpoint)()
+        #self.endpoint = getattr(root, endpoint)()
+        self.endpoint = None
 
         # query interface
         self.report_type = self.REPORT_TYPES[endpoint]
