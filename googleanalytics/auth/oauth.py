@@ -46,7 +46,7 @@ def authenticate(credentials):
     
     #save accounts
     with open("raw_accounts.pkl", "wb") as f:
-        f.write(raw_accounts)
+        pickle.dump(raw_accounts, f)
         
     accounts = [account.Account(raw, service, credentials) for raw in raw_accounts]
     return addressable.List(accounts, indices=['id', 'name'], insensitive=True)
