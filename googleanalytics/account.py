@@ -36,28 +36,28 @@ class Account(object):
 
     def __init__(self, raw, service, credentials):
         
-        self.service = None
-        self.credentials = None
-        self.raw = {'childLink': {'href': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXX/webproperties',
-              'type': 'analytics#webproperties'},
-             'created': '2006-06-07T20:01:28.000Z',
-             'id': 'XXXXXX',
-             'kind': 'analytics#account',
-             'name': 'sitename_11',
-             'permissions': {'effective': ['COLLABORATE', 'READ_AND_ANALYZE']},
-             'selfLink': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXX',
-             'updated': '2019-07-02T18:00:31.573Z'}
+        #self.service = None
+        #self.credentials = None
+        #self.raw = {'childLink': {'href': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXX/webproperties',
+        #      'type': 'analytics#webproperties'},
+        #     'created': '2006-06-07T20:01:28.000Z',
+        #     'id': 'XXXXXX',
+        #     'kind': 'analytics#account',
+        #     'name': 'sitename_11',
+        #     'permissions': {'effective': ['COLLABORATE', 'READ_AND_ANALYZE']},
+        #     'selfLink': 'https://www.googleapis.com/analytics/v3/management/accounts/XXXXXX',
+        #     'updated': '2019-07-02T18:00:31.573Z'}
 
-        self.id = 'XXXXXX'
-        self.name = 'sitename_11'
-        self.permissions = ['COLLABORATE', 'READ_AND_ANALYZE']
+        #self.id = 'XXXXXX'
+        #self.name = 'sitename_11'
+        #self.permissions = ['COLLABORATE', 'READ_AND_ANALYZE']
         
-        #self.service = service
-        #self.credentials = credentials
-        #self.raw = raw
-        #self.id = raw['id']
-        #self.name = raw['name']
-        #self.permissions = raw['permissions']['effective']
+        self.service = service
+        self.credentials = credentials
+        self.raw = raw
+        self.id = raw['id']
+        self.name = raw['name']
+        self.permissions = raw['permissions'] #raw['permissions']['effective']
 
     @property
     @utils.memoize
