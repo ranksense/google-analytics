@@ -57,49 +57,52 @@ def authenticate(
     to authorize this Python module to access Google Analytics data on their behalf,
     using an OAuth2 token.
     """
-    
-    
-    accounts = oauth.authenticate(None)
-    
-    scope = navigate(accounts, account=account, webproperty=webproperty, profile=profile)
-    return scope
 
     #Skip
 
-    credentials = oauth.Credentials.find(
-        valid=True,
-        interactive=interactive,
-        prefix=prefix,
-        suffix=suffix,
-        client_id=client_id,
-        client_secret=client_secret,
-        client_email=client_email,
-        private_key=private_key,
-        access_token=access_token,
-        refresh_token=refresh_token,
-        identity=identity,
-        )
+    #credentials = oauth.Credentials.find(
+    #    valid=True,
+    #    interactive=interactive,
+    #    prefix=prefix,
+    #    suffix=suffix,
+    #    client_id=client_id,
+    #    client_secret=client_secret,
+    #    client_email=client_email,
+    #    private_key=private_key,
+    #    access_token=access_token,
+    #    refresh_token=refresh_token,
+    #    identity=identity,
+    #    )
 
-    if credentials.incomplete:
-        if interactive:
-            credentials = authorize(
-                client_id=credentials.client_id,
-                client_secret=credentials.client_secret,
-                save=save,
-                identity=credentials.identity,
-                prefix=prefix,
-                suffix=suffix,
-                )
-        elif credentials.type == 2:
-            credentials = authorize(
-                client_email=credentials.client_email,
-                private_key=credentials.private_key,
-                identity=credentials.identity,
-                save=save,
-                )
-        else:
-            raise KeyError("Cannot authenticate: enable interactive authorization, pass a token or use a service account.")
+    #if credentials.incomplete:
+    #    if interactive:
+    #        credentials = authorize(
+    #            client_id=credentials.client_id,
+    #            client_secret=credentials.client_secret,
+    #            save=save,
+    #            identity=credentials.identity,
+    #            prefix=prefix,
+    #            suffix=suffix,
+    #            )
+    #    elif credentials.type == 2:
+    #        credentials = authorize(
+    #            client_email=credentials.client_email,
+    #            private_key=credentials.private_key,
+    #            identity=credentials.identity,
+    #            save=save,
+    #            )
+    #    else:
+    #        raise KeyError("Cannot authenticate: enable interactive authorization, pass a token or use a service account.")
     
+    credentials = dict()
+    credentials["access_token"] = None
+    credentials["client_email"] = None
+    credentials["client_id"] = None
+    credentials["client_secret"] = None
+    credentials["identity"] = "info@ranksense.com"
+    credentials["private_key"] = None
+    credentials["refresh_token"] = None
+
     accounts = oauth.authenticate(credentials)
     scope = navigate(accounts, account=account, webproperty=webproperty, profile=profile)
     return scope
