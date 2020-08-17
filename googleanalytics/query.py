@@ -255,7 +255,7 @@ class Report(object):
     def as_dict(self, with_metadata=False):
         import pickle 
         
-        with open("anon_report.pkl", "wb") as f:
+        with open("anon_report.pkl", "rb") as f:
             serialized = pickle.load(f)
             
             return serialized
