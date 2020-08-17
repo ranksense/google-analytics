@@ -667,7 +667,7 @@ class ReportingAPI(object):
         
         import pickle
 
-        with open("raw_columans.pkl", "rb") as f:
+        with open("raw_columns.pkl", "rb") as f:
           raw_columns = pickle.load(f)
         
         hydrated_columns = utils.flatten(map(Column.from_metadata, raw_columns))
