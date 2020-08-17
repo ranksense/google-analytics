@@ -614,33 +614,34 @@ class Query(object):
     def execute(self):
         raw = self.build()
 
-        if self.api.cache and self.cacheable and self.api.cache.exists(self.signature):
-            response = self.api.cache.get(raw)
-        else:
-            try:
-                self._wait()
-                response = self.endpoint.get(**raw).execute()
-            except Exception as err:
-                if isinstance(err, TypeError):
-                    width = max(map(len, self.raw.keys()))
-                    raw = [(key.ljust(width), value) for key, value in self.raw.items()]
-                    parameters = utils.paste(raw, '\t', '\n')
-                    diagnostics = utils.format(
-                        """
-                        {message}
+        #if self.api.cache and self.cacheable and self.api.cache.exists(self.signature):
+        #    response = self.api.cache.get(raw)
+        #else:
+        #    try:
+        #        self._wait()
+        #        response = self.endpoint.get(**raw).execute()
+        #    except Exception as err:
+        #        if isinstance(err, TypeError):
+        #            width = max(map(len, self.raw.keys()))
+        #            raw = [(key.ljust(width), value) for key, value in self.raw.items()]
+        #            parameters = utils.paste(raw, '\t', '\n')
+        #            diagnostics = utils.format(
+        #                """
+        #                {message}
+        #
+        #                The query you submitted was:
+        #
+        #                {parameters}
+        #                """, message=str(err), parameters=parameters)
+        #            raise errors.InvalidRequestError(diagnostics)
+        #        else:
+        #            raise err
 
-                        The query you submitted was:
+        #if self.api.cache and self.cacheable:
+        #    self.api.cache.set(raw, response)
 
-                        {parameters}
-                        """, message=str(err), parameters=parameters)
-                    raise errors.InvalidRequestError(diagnostics)
-                else:
-                    raise err
-
-        if self.api.cache and self.cacheable:
-            self.api.cache.set(raw, response)
-
-        return Report(response, self)
+        #return Report(response, self)
+        return Report(None, self)
 
     @property
     def report(self):
