@@ -1038,25 +1038,27 @@ class CoreQuery(Query):
         through `CoreQuery#step`, `get` will leaf through all pages,
         concatenate the results and produce a single Report instance.
         """
+        
+        return self.execute()
+    
+        #cursor = self
+        #report = None
+        #is_complete = False
+        #is_enough = False
 
-        cursor = self
-        report = None
-        is_complete = False
-        is_enough = False
+        #while not (is_enough or is_complete):
+        #    chunk = cursor.execute()
 
-        while not (is_enough or is_complete):
-            chunk = cursor.execute()
+        #    if report:
+        #        report.append(chunk.raw[0], cursor)
+        #    else:
+        #        report = chunk
 
-            if report:
-                report.append(chunk.raw[0], cursor)
-            else:
-                report = chunk
+        #    is_enough = len(report.rows) >= self.meta.get('limit', float('inf'))
+        #    is_complete = chunk.is_complete
+        #    cursor = cursor.next()
 
-            is_enough = len(report.rows) >= self.meta.get('limit', float('inf'))
-            is_complete = chunk.is_complete
-            cursor = cursor.next()
-
-        return report
+        #return report
 
 
 
