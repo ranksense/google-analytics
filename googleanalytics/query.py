@@ -101,27 +101,27 @@ class Report(object):
         self.queries = []
 
         all_columns = query.api.all_columns
-        report_columns = [column['name'] for column in raw['columnHeaders']]
-        self.columns = ColumnList([all_columns[column] for column in report_columns])
-        self.metrics = addressable.filter(lambda column: column.type == 'metric', self.columns)
-        self.dimensions = addressable.filter(lambda column: column.type == 'dimension', self.columns)
-        time_columns = ['date_hour', 'date', 'year_week', 'year_month', 'year']
-        try:
-            self.granularity = next(column for column in self.dimensions if column.python_slug in time_columns)
-        except StopIteration:
-            self.granularity = None
-        slugs = [column.python_slug for column in self.columns]
-        self.Row = collections.namedtuple('Row', slugs)
-        self.rows = []
-        self.append(raw, query)
+        #report_columns = [column['name'] for column in raw['columnHeaders']]
+        #self.columns = ColumnList([all_columns[column] for column in report_columns])
+        #self.metrics = addressable.filter(lambda column: column.type == 'metric', self.columns)
+        #self.dimensions = addressable.filter(lambda column: column.type == 'dimension', self.columns)
+        #time_columns = ['date_hour', 'date', 'year_week', 'year_month', 'year']
+        #try:
+        #    self.granularity = next(column for column in self.dimensions if column.python_slug in time_columns)
+        #except StopIteration:
+        #    self.granularity = None
+        #slugs = [column.python_slug for column in self.columns]
+        #self.Row = collections.namedtuple('Row', slugs)
+        #self.rows = []
+        #self.append(raw, query)
 
-        self.since = self.until = None
+        #self.since = self.until = None
 
-        if 'start-date' in raw['query']:
-            self.since = datetime.strptime(raw['query']['start-date'], '%Y-%m-%d')
+        #if 'start-date' in raw['query']:
+        #    self.since = datetime.strptime(raw['query']['start-date'], '%Y-%m-%d')
 
-        if 'end-date' in raw['query']:
-            self.until = datetime.strptime(raw['query']['end-date'], '%Y-%m-%d')
+        #if 'end-date' in raw['query']:
+        #    self.until = datetime.strptime(raw['query']['end-date'], '%Y-%m-%d')
 
     def append(self, raw, query):
         self.raw.append(raw)
