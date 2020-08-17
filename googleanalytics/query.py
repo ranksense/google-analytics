@@ -253,23 +253,31 @@ class Report(object):
                 return table
 
     def as_dict(self, with_metadata=False):
-        serialized = []
-        for row in self.rows:
-            row = row._asdict()
-            for key, value in row.items():
-                row[key] = utils.date.serialize(value)
-            serialized.append(row)
-
-        if with_metadata:
-            return {
-                'title': self.queries[0].title,
-                'queries': self.queries,
-                'metrics': [column.name for column in self.metrics],
-                'dimensions': [column.name for column in self.dimensions],
-                'results': serialized,
-                }
-        else:
+        import pickle 
+        
+        with open("anon_report.pkl", "wb") as f:
+            serialized = pickle.load(f)
+            
             return serialized
+            
+        #serialized = []
+        
+        #for row in self.rows:
+        #    row = row._asdict()
+        #    for key, value in row.items():
+        #        row[key] = utils.date.serialize(value)
+        #    serialized.append(row)
+
+        #if with_metadata:
+        #    return {
+        #        'title': self.queries[0].title,
+        #        'queries': self.queries,
+        #        'metrics': [column.name for column in self.metrics],
+        #        'dimensions': [column.name for column in self.dimensions],
+        #        'results': serialized,
+        #        }
+        #else:
+        #    return serialized
 
     def as_dataframe(self):
         import pandas
